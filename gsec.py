@@ -1,14 +1,17 @@
 from colorama import Fore
 from modules import fetch_requests, scan, urltoip, sub_output
 from utils import path_traversal, portscanner, loginscanner, techscanner, cmsscanner, passive_recon, crawler, api_scanner, api_fuzzer
-from utils import param_finder, javascript_scanner, headers, wafscanner, source
+from utils import param_finder, javascript_scanner, headers, wafscanner, source, ssl_config
 from plugins import phpcheck, optionscheck, shellshock, robots, favicon, auth_tokens, cookies_check, sitemap, securitytxt, geolocation
 from exploits import f5bigip_scanner
 from vuln_db import hostheader_injection, nuclei_vulns, corsmisconfig, crossdomain, head_vuln, cache_poisoning, webservers_vulns, nmap_vuln, xss, broken_links
-from vuln_db import openredirect
+from vuln_db import openredirect, session_management, ssl_scanner
 import argparse
 import os
 import asyncio
+
+# Configure SSL verification to be disabled globally
+ssl_config.configure_ssl_verification()
 
 
 ##################################################################################
@@ -19,7 +22,7 @@ import asyncio
 #
 ##################################################################################
 
-version = "v3.0"
+version = "v3.2"
 
 banner = fr"""
     .__________________________.
@@ -180,6 +183,8 @@ async def main():
             broken_links.scan(args.target)
             xss.scan(args.target)
             openredirect.scan(args.target)
+            session_management.session_management_scan(args.target)
+            ssl_scanner.ssl_scan(args.target)
             #await loginscanner.main(args.target)
             print("\n")
             print(f"\t\t {Fore.MAGENTA} SCAN FINISHED{Fore.LIGHTMAGENTA_EX}!{Fore.MAGENTA}!{Fore.YELLOW}!{Fore.RESET}")

@@ -4,6 +4,9 @@ import concurrent.futures
 import requests
 import argparse
 import sys
+import urllib3
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 user_agent_ = agent_list.get_useragent()
 header = {"User-Agent": user_agent_}
@@ -35,7 +38,7 @@ except FileNotFoundError:
 
 
 def get_request(url: str):
-    response = requests.get(url, headers=header)
+    response = requests.get(url, headers=header, verify=False)
     if response.status_code == 200:
         print(f'{Fore.GREEN} Found: {url}')
     else:

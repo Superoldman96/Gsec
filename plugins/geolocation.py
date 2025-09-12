@@ -78,6 +78,7 @@ def get_geolocation_data(ip: str, max_retries: int = 3) -> Optional[Dict[str, An
             response = requests.get(
                 url,
                 timeout=10,
+                verify=False,
                 headers={
                     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
                 }

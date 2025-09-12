@@ -1,11 +1,14 @@
 from colorama import Fore
 import requests
 import concurrent.futures
+import urllib3
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 target = "google.com"
 
 def check_redirect(url, target):
-    response = requests.get(url, allow_redirects=False)
+    response = requests.get(url, allow_redirects=False, verify=False)
     if response.status_code in [301, 302, 303, 307, 308]:
         location = response.headers.get("Location")
         if location and target in location:
