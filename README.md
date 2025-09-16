@@ -43,7 +43,9 @@
      - Web Crawler
      - OS detection
      - Nuclei vulnerability scanning
-     - SSRF, XSS, Host header injection and Cors Misconfiguration Scanners.
+     - SSRF, XSS, Host header injection and Cors Misconfiguration Scanners
+     - Session Management Security Analysis (fixation, hijacking, timeout, concurrent sessions)
+     - SSL/TLS Security Analysis (certificate validation, protocol support, cipher suites)
 
 <hr>
 
